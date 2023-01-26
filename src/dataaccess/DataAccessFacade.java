@@ -6,23 +6,27 @@ import java.io.Serializable;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import com.group1.librarysystem.dto.CheckoutRecordDTO;
 
 import business.Book;
 import business.BookCopy;
 import business.LibraryMember;
+import business.LibrarySystemException;
 import dataaccess.DataAccessFacade.StorageType;
 
 
 public class DataAccessFacade implements DataAccess {
 	
 	enum StorageType {
-		BOOKS, MEMBERS, USERS;
+		BOOKS, MEMBERS, USERS,CHECKOUTRECORD;
 	}
 	
 	public static final String OUTPUT_DIR = System.getProperty("user.dir") 
-			+ "\\src\\dataaccess\\storage";
+			+ "/src/dataaccess/storage";
 	public static final String DATE_PATTERN = "MM/dd/yyyy";
 	
 	//implement: other save operations
@@ -79,6 +83,7 @@ public class DataAccessFacade implements DataAccess {
 	}
 	
 	static void saveToStorage(StorageType type, Object ob) {
+		System.out.println("CALLED"+type);
 		ObjectOutputStream out = null;
 		try {
 			Path path = FileSystems.getDefault().getPath(OUTPUT_DIR, type.toString());
@@ -143,6 +148,80 @@ public class DataAccessFacade implements DataAccess {
 			return "(" + first.toString() + ", " + second.toString() + ")";
 		}
 		private static final long serialVersionUID = 5399827794066637059L;
+	}
+
+
+
+	@Override
+	public void addBook(Book book) throws LibrarySystemException {
+		HashMap<String, Book> books = readBooksMap();
+		String bookID = book.getIsbn();
+		// Book with this ISBN already present.
+		if (books.containsKey(bookID)) {
+			throw new LibrarySystemException("Book with this ISBN already Present.");
+		}
+		books.put(bookID, book);
+		saveToStorage(StorageType.BOOKS, books);
+	}
+
+	@Override
+	public void addMember(LibraryMember member) throws LibrarySystemException {	
+		HashMap<String, LibraryMember> members = readMemberMap();
+		String memberId = member.getMemberId();
+		// Member with this ID already present.
+		if (members.containsKey(memberId)) {
+			throw new LibrarySystemException("Member with this ID already Present.");
+		}
+		members.put(memberId, member);
+		saveToStorage(StorageType.MEMBERS, members);
+	}
+
+	@Override
+	public void updateBook(Book book) {
+		HashMap<String, Book> bookList = readBooksMap();
+		String isbn = book.getIsbn();
+		if (bookList.containsKey(isbn)) {
+			bookList.put(isbn, book);
+		}
+		saveToStorage(StorageType.BOOKS, bookList);
+	}
+
+	@Override
+	public void saveToCheckoutRecord(String libraryMemberId, CheckoutRecordDTO dto) {
+	
+		HashMap<String, List<CheckoutRecordDTO>> checkoutRecordList = readCheckoutRecord();
+		System.out.println("IN DAF"+dto.getMemberId());
+		if (!checkoutRecordList.isEmpty() && checkoutRecordList.containsKey(libraryMemberId)) {
+			List<CheckoutRecordDTO> updateCheckoutList = checkoutRecordList.get(libraryMemberId);
+			updateCheckoutList.add(dto);
+			checkoutRecordList.put(libraryMemberId, updateCheckoutList);
+		} else {
+			List<CheckoutRecordDTO> newList = new ArrayList<>();
+			newList.add(dto);
+			checkoutRecordList.put(libraryMemberId, newList);
+		}
+		saveToStorage(StorageType.CHECKOUTRECORD, checkoutRecordList);
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, List<CheckoutRecordDTO>> readCheckoutRecord() {
+		return (HashMap<String, List<CheckoutRecordDTO>>) readFromStorage(StorageType.CHECKOUTRECORD);
+	}
+
+	@Override
+	public List<CheckoutRecordDTO> getCheckoutRecordByMemberId(String libraryMemberId) {
+		List<CheckoutRecordDTO> checkoutList = null;
+		HashMap<String, List<CheckoutRecordDTO>> checkoutMap = readCheckoutRecord();
+		if (checkoutMap.containsKey(libraryMemberId)) {
+			checkoutList = checkoutMap.get(libraryMemberId);
+		}
+		return checkoutList;
+	}
+
+	public static void loadCheckout() {
+		HashMap<String, List<CheckoutRecordDTO>> chechoutListMap = new HashMap<>();
+		saveToStorage(StorageType.CHECKOUTRECORD, chechoutListMap);
 	}
 	
 }

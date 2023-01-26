@@ -29,9 +29,14 @@ public class AllBookIdsWindow extends JFrame implements LibWindow {
 	private JPanel lowerPanel;
 	private TextArea textArea;
 	
+	public JPanel getMainPanel() {
+		return mainPanel;
+	}
 
 	//Singleton class
-	private AllBookIdsWindow() {}
+	private AllBookIdsWindow() {
+		init();
+	}
 	
 	public void init() {
 		mainPanel = new JPanel();
@@ -41,9 +46,11 @@ public class AllBookIdsWindow extends JFrame implements LibWindow {
 		defineLowerPanel();
 		mainPanel.add(topPanel, BorderLayout.NORTH);
 		mainPanel.add(middlePanel, BorderLayout.CENTER);
-		mainPanel.add(lowerPanel, BorderLayout.SOUTH);
+		//mainPanel.add(lowerPanel, BorderLayout.SOUTH);
 		getContentPane().add(mainPanel);
 		isInitialized = true;
+		
+		setData();
 	}
 	
 	public void defineTopPanel() {
@@ -84,6 +91,16 @@ public class AllBookIdsWindow extends JFrame implements LibWindow {
 	
 	public void setData(String data) {
 		textArea.setText(data);
+	}
+	
+	public void setData() {
+		List<String> ids = ci.allBookIds();
+		Collections.sort(ids);
+		StringBuilder sb = new StringBuilder();
+		for (String s : ids) {
+			sb.append(s + "\n");
+		}
+		setData(sb.toString());
 	}
 	
 //	private void populateTextArea() {

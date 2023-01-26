@@ -1,12 +1,17 @@
 package dataaccess;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+
+import com.group1.librarysystem.dto.CheckoutRecordDTO;
 
 import business.Address;
 import business.Author;
 import business.Book;
+import business.BookCopy;
 import business.LibraryMember;
 
 /**
@@ -25,11 +30,18 @@ public class TestData {
 	public static void main(String[] args) {
 		TestData td = new TestData();
 		td.bookData();
-		td.libraryMemberData();
-		td.userData();
-		DataAccess da = new DataAccessFacade();
-		System.out.println(da.readBooksMap());
-		System.out.println(da.readUserMap());
+//		td.libraryMemberData();
+//		td.userData();
+	//	DataAccess da = new DataAccessFacade();
+	//	System.out.println(da.readBooksMap());
+	//	System.out.println(da.readUserMap());
+		DataAccessFacade.loadCheckout();
+		try {
+			td.checkoutRecordData();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	///create books
 	public void bookData() {
@@ -107,4 +119,23 @@ public class TestData {
 			add(new User("103", "111", Auth.BOTH));
 		}
 	};
+	
+	public void checkoutRecordData() throws Exception {
+		DataAccessFacade da = new DataAccessFacade();	
+		HashMap<String, Book> bookMap = da.readBooksMap();
+		
+		bookMap.entrySet().forEach(entry -> {
+		    System.out.println("each"+entry.getKey() + " " + entry.getValue());
+		});
+		Book bookTest = bookMap.get("99-22223");
+		System.out.println("BOOK TEST"+bookTest);
+		BookCopy bc = bookTest.getCopy(1);
+		System.out.println("BOOK COPY"+bc);
+		CheckoutRecordDTO dtoTest = new CheckoutRecordDTO(bc,"1001");
+		dtoTest.setCheckoutDate(LocalDate.of(2022, 03, 26));
+		dtoTest.setDueDate(LocalDate.of(2022, 05, 12));
+		da.saveToCheckoutRecord("1001", dtoTest);
+		
+		
+	}
 }
