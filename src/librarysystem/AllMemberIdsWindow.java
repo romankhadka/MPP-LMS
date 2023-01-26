@@ -106,7 +106,7 @@ public class AllMemberIdsWindow extends JFrame implements LibWindow {
 		isInitialized = val;
 		
 	}
-	
+//	
 }
 
 
