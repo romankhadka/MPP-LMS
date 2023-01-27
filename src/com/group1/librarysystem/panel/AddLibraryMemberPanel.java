@@ -3,6 +3,7 @@ package com.group1.librarysystem.panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.SystemColor;
 
 import javax.swing.JButton;
@@ -48,11 +49,12 @@ public class AddLibraryMemberPanel {
 		JLabel lblAddNewMember = new JLabel("Add New Member");
 		lblAddNewMember.setFont(new Font("Fira Code", Font.BOLD, 18));
 		lblAddNewMember.setForeground(Color.DARK_GRAY);
-		lblAddNewMember.setBounds(51, 29, 170, 30);
+		lblAddNewMember.setBounds(51, 29, 270, 30);
 		panel.add(lblAddNewMember);
-
+		
 		id = new JTextField();
 		id.setBounds(62, 127, 148, 39);
+		id.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(id);
 		id.setColumns(10);
 
@@ -64,6 +66,7 @@ public class AddLibraryMemberPanel {
 		firstName = new JTextField();
 		firstName.setColumns(10);
 		firstName.setBounds(241, 127, 282, 39);
+		firstName.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(firstName);
 
 		JLabel lblId_1 = new JLabel("First Name");
@@ -74,6 +77,7 @@ public class AddLibraryMemberPanel {
 		lastName = new JTextField();
 		lastName.setColumns(10);
 		lastName.setBounds(560, 127, 282, 39);
+		lastName.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(lastName);
 
 		JLabel lblId_1_1 = new JLabel("Last Name");
@@ -84,11 +88,13 @@ public class AddLibraryMemberPanel {
 		street = new JTextField();
 		street.setColumns(10);
 		street.setBounds(62, 221, 211, 39);
+		street.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(street);
 
 		city = new JTextField();
 		city.setColumns(10);
 		city.setBounds(288, 221, 200, 39);
+		city.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(city);
 
 		JLabel lblId_1_2 = new JLabel("City");
@@ -99,6 +105,7 @@ public class AddLibraryMemberPanel {
 		state = new JTextField();
 		state.setColumns(10);
 		state.setBounds(503, 221, 174, 39);
+		state.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(state);
 
 		JLabel lblId_1_1_1 = new JLabel("State");
@@ -109,6 +116,7 @@ public class AddLibraryMemberPanel {
 		zip = new JTextField();
 		zip.setColumns(10);
 		zip.setBounds(706, 221, 135, 39);
+		zip.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(zip);
 
 		JLabel lblId_1_2_1 = new JLabel("Zip");
@@ -119,6 +127,7 @@ public class AddLibraryMemberPanel {
 		telephoneNo = new JTextField();
 		telephoneNo.setColumns(10);
 		telephoneNo.setBounds(62, 301, 232, 39);
+		telephoneNo.setMargin(new Insets(5, 10, 5, 10));
 		panel.add(telephoneNo);
 
 		JLabel lblId_1_1_1_1 = new JLabel("Telephone Number");

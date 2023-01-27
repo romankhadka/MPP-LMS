@@ -3,6 +3,7 @@ package com.group1.librarysystem.panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,8 @@ public class AddNewBookPanel {
 		bookPanel.setLayout(null);
 
 		isbn = new JTextField();
-		isbn.setBounds(12, 30, 141, 39);
+		isbn.setMargin(new Insets(5, 10, 5, 10));
+		isbn.setBounds(12, 30, 220, 39);
 		bookPanel.add(isbn);
 		isbn.setColumns(10);
 
@@ -84,24 +86,24 @@ public class AddNewBookPanel {
 		lblId_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
 
 		title = new JTextField();
-		title.setBounds(186, 30, 282, 39);
+		title.setBounds(252, 30, 220, 39);
 		bookPanel.add(title);
 		title.setColumns(10);
 
 		JLabel lblId_1_1 = new JLabel("Title");
-		lblId_1_1.setBounds(189, 12, 143, 15);
+		lblId_1_1.setBounds(258, 12, 143, 15);
 		bookPanel.add(lblId_1_1);
 		lblId_1_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
 
 		String[] checkoutLengthOption = { "7", "21" };
 		maxCheckoutLength = new JComboBox<String>(checkoutLengthOption);
-		maxCheckoutLength.setBounds(519, 30, 220, 39);
+		maxCheckoutLength.setBounds(492, 30, 220, 39);
 		maxCheckoutLength.setSelectedIndex(0);
 		bookPanel.add(maxCheckoutLength);
 
 		JLabel lblId_1_2 = new JLabel("Max Checkout Length");
 		lblId_1_2.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
-		lblId_1_2.setBounds(522, 12, 217, 15);
+		lblId_1_2.setBounds(498, 12, 217, 15);
 		bookPanel.add(lblId_1_2);
 
 		JLabel lblId_1_4 = new JLabel("Authors");
@@ -147,7 +149,7 @@ public class AddNewBookPanel {
 
 		bookAddBtn.setForeground(Color.WHITE);
 		bookAddBtn.setBackground(SystemColor.desktop);
-		bookAddBtn.setBounds(984, 166, 102, 41);
+		bookAddBtn.setBounds(755, 220, 100, 41);
 		panel.add(bookAddBtn);
 
 		JButton btnCancel = new JButton("Clear");
@@ -158,12 +160,12 @@ public class AddNewBookPanel {
 
 		btnCancel.setForeground(Color.WHITE);
 		btnCancel.setBackground(Color.LIGHT_GRAY);
-		btnCancel.setBounds(870, 166, 102, 41);
+		btnCancel.setBounds(635, 220, 100, 41);
 		panel.add(btnCancel);
 
 		JPanel authorPanel = new JPanel();
-		authorPanel.setBackground(Color.WHITE);
-		authorPanel.setBounds(51, 253, 1101, 315);
+//		authorPanel.setBackground(Color.WHITE);
+		authorPanel.setBounds(51, 273, 807, 350);
 		panel.add(authorPanel);
 		authorPanel.setLayout(null);
 
@@ -173,19 +175,19 @@ public class AddNewBookPanel {
 		});
 
 		JButton btnCancelAuthor = new JButton("Cancel");
-		btnCancelAuthor.setBounds(829, 226, 102, 41);
+		btnCancelAuthor.setBounds(548, 280, 100, 41);
 		authorPanel.add(btnCancelAuthor);
 		btnCancelAuthor.setForeground(Color.WHITE);
 		btnCancelAuthor.setBackground(Color.LIGHT_GRAY);
 
 		JButton btnAddAuthor = new JButton("Add Author");
-		btnAddAuthor.setBounds(943, 226, 119, 41);
+		btnAddAuthor.setBounds(668, 280, 135, 41);
 		authorPanel.add(btnAddAuthor);
 		btnAddAuthor.setForeground(Color.WHITE);
 		btnAddAuthor.setBackground(SystemColor.desktop);
 
 		JPanel addressPanel = new JPanel();
-		addressPanel.setBounds(0, 0, 810, 276);
+		addressPanel.setBounds(0, 20, 810, 276);
 
 		authorPanel.add(addressPanel);
 		addressPanel.setLayout(null);
@@ -193,6 +195,7 @@ public class AddNewBookPanel {
 		firstName = new JTextField();
 		addressPanel.add(firstName);
 		firstName.setColumns(10);
+		firstName.setMargin(new Insets(5, 10, 5, 10));
 		firstName.setBounds(23, 30, 211, 39);
 
 		JLabel lblId_1_3 = new JLabel("First Name");
@@ -203,6 +206,7 @@ public class AddNewBookPanel {
 		lastName = new JTextField();
 		addressPanel.add(lastName);
 		lastName.setColumns(10);
+		lastName.setMargin(new Insets(5, 10, 5, 10));
 		lastName.setBounds(255, 30, 282, 39);
 
 		JLabel lblId_1_1_2 = new JLabel("Last Name");
@@ -213,12 +217,14 @@ public class AddNewBookPanel {
 		bio = new JTextArea();
 		addressPanel.add(bio);
 		bio.setBounds(255, 166, 437, 72);
-
+		bio.setMargin(new Insets(5, 10, 5, 10));
+		
 		street = new JTextField();
 		addressPanel.add(street);
 		street.setColumns(10);
 		street.setBounds(23, 99, 211, 39);
-
+		street.setMargin(new Insets(5, 10, 5, 10));
+		
 		JLabel lblStreet_2 = new JLabel("Street");
 		addressPanel.add(lblStreet_2);
 		lblStreet_2.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -228,7 +234,8 @@ public class AddNewBookPanel {
 		addressPanel.add(city);
 		city.setColumns(10);
 		city.setBounds(255, 99, 200, 39);
-
+		city.setMargin(new Insets(5, 10, 5, 10));
+		
 		JLabel lblId_1_2_2 = new JLabel("City");
 		addressPanel.add(lblId_1_2_2);
 		lblId_1_2_2.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -238,7 +245,8 @@ public class AddNewBookPanel {
 		addressPanel.add(state);
 		state.setColumns(10);
 		state.setBounds(465, 99, 174, 39);
-
+		state.setMargin(new Insets(5, 10, 5, 10));
+		
 		JLabel lblId_1_1_1_1 = new JLabel("State");
 		addressPanel.add(lblId_1_1_1_1);
 		lblId_1_1_1_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -248,7 +256,8 @@ public class AddNewBookPanel {
 		addressPanel.add(zip);
 		zip.setColumns(10);
 		zip.setBounds(657, 99, 135, 39);
-
+		zip.setMargin(new Insets(5, 10, 5, 10));
+		
 		JLabel lblId_1_2_1_1 = new JLabel("Zip");
 		addressPanel.add(lblId_1_2_1_1);
 		lblId_1_2_1_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -262,6 +271,8 @@ public class AddNewBookPanel {
 		telephoneNo = new JTextField();
 		telephoneNo.setColumns(10);
 		telephoneNo.setBounds(23, 168, 211, 39);
+		telephoneNo.setMargin(new Insets(5, 10, 5, 10));
+		
 		addressPanel.add(telephoneNo);
 
 		JLabel lblId_1_2_1_1_1 = new JLabel("Telephone Number");

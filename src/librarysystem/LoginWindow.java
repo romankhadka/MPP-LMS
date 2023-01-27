@@ -5,8 +5,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.SystemColor;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -60,8 +65,12 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 	public void init() {
 		mainPanel = new JPanel();
-		defineCentral();
-
+		try {
+			defineCentral();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mainPanel.setBounds(100, 100, 821, 722);
 		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setLayout(null);
@@ -72,37 +81,45 @@ public class LoginWindow extends JFrame implements LibWindow {
 		isInitialized(true);
 	}
 
-	private void defineCentral() {
+	private void defineCentral() throws IOException {
 
 		centralFormPanel = new JPanel();
 		centralFormPanel.setBackground(new Color(249, 249, 249));
-		centralFormPanel.setBounds(400, 75, 350, 550);
+		centralFormPanel.setBounds(400, 75, 450, 550);
 		centralFormPanel.setLayout(null);
 
+//		String currDirectory = System.getProperty("user.dir");
+//		String pathToImage = currDirectory + "/src/librarysystem/Library.png";
+		
+		BufferedImage myPicture = ImageIO.read(new File(System.getProperty("user.dir")+"/src/librarysystem/library.png"));
+		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+		picLabel.setBounds(175, 35, 120, 89);
+		centralFormPanel.add(picLabel);
+		
 		JLabel lblLibrayManagementSystem = new JLabel("LIBRARY");
 		lblLibrayManagementSystem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLibrayManagementSystem.setForeground(commonColor);
 		lblLibrayManagementSystem.setFont(new Font("Roboto Slab", Font.BOLD, 31));
-		lblLibrayManagementSystem.setBounds(12, 141, 326, 32);
+		lblLibrayManagementSystem.setBounds(75, 141, 326, 32);
 		centralFormPanel.add(lblLibrayManagementSystem);
 
 		JLabel lblSystem = new JLabel("SYSTEM");
 		lblSystem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSystem.setForeground(commonColor);
 		lblSystem.setFont(new Font("Roboto Slab", Font.BOLD, 31));
-		lblSystem.setBounds(15, 189, 326, 69);
+		lblSystem.setBounds(75, 189, 326, 69);
 		centralFormPanel.add(lblSystem);
 
 		JLabel lblManagement = new JLabel("MANAGEMENT");
 		lblManagement.setHorizontalAlignment(SwingConstants.CENTER);
 		lblManagement.setForeground(commonColor);
 		lblManagement.setFont(new Font("Roboto Slab", Font.BOLD, 30));
-		lblManagement.setBounds(22, 161, 326, 55);
+		lblManagement.setBounds(75, 161, 326, 55);
 		centralFormPanel.add(lblManagement);
 
 		JPanel formWrapperPanel = new JPanel();
 		formWrapperPanel.setBackground(SystemColor.text);
-		formWrapperPanel.setBounds(29, 316, 319, 234);
+		formWrapperPanel.setBounds(75, 265, 319, 254);
 		centralFormPanel.add(formWrapperPanel);
 		formWrapperPanel.setLayout(null);
 
@@ -115,6 +132,7 @@ public class LoginWindow extends JFrame implements LibWindow {
 		username = new JTextField();
 		username.setBackground(new Color(249, 249, 249));
 		username.setFont(new Font("Roboto Slab", Font.PLAIN, 16));
+		username.setMargin(new Insets(10, 10, 10, 10));
 		username.setBounds(12, 41, 256, 38);
 		usernamePanel.add(username);
 		username.setColumns(10);
@@ -141,6 +159,7 @@ public class LoginWindow extends JFrame implements LibWindow {
 		password.setBackground(new Color(249, 249, 249));
 		password.setFont(new Font("Roboto Slab", Font.PLAIN, 16));
 		password.setColumns(10);
+		password.setMargin(new Insets(10, 10, 10, 10));
 		password.setBounds(12, 41, 256, 38);
 		passwordPanel.add(password);
 
