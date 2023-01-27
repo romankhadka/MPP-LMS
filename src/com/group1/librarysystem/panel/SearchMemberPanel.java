@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -125,13 +127,15 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panel.add(txtPanel);
 		txtMemberId = new JTextField();
+		txtMemberId.setMargin(new Insets(5, 10, 5, 10));
+		txtMemberId.setBounds(12, 30, 220, 39);
 		txtPanel.add(txtMemberId);
 		txtMemberId.setColumns(10);
 
 		JButton btnSearchButton = new JButton("Search");
 		btnSearchButton.setFont(new Font("Roboto Slab", Font.BOLD, 13));
 		btnSearchButton.setForeground(Color.WHITE);
-		btnSearchButton.setBackground(new Color(0, 0, 139));
+		btnSearchButton.setBackground(SystemColor.desktop);
 		btnSearchButton.setBounds(345, 40, 90, 36);
 
 		btnSearchButton.addActionListener(new ActionListener() {

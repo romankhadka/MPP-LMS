@@ -2,9 +2,12 @@ package com.group1.librarysystem.panel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -88,7 +91,6 @@ public class CheckoutPanel  extends JFrame implements LibWindow {
 		txtMemberId.setFont(ThemeColor.formLabel);
 		txtISBN = getLblAndTxt(listPanel, "Book ISBN", true);
 		txtISBN.setFont(ThemeColor.formLabel);
-
 		JLabel label = new JLabel("");
 		listPanel.add(label);
 
@@ -98,8 +100,9 @@ public class CheckoutPanel  extends JFrame implements LibWindow {
 		JButton btnCheckout = new JButton("Checkout");
 		btnCheckout.setFont(new Font("Roboto Slab", Font.BOLD, 13));
 		btnCheckout.setForeground(Color.WHITE);
-		btnCheckout.setBackground(new Color(0, 0, 139));
-		btnCheckout.setBounds(345, 40, 90, 36);
+		btnCheckout.setBackground(SystemColor.desktop);
+		btnCheckout.setPreferredSize(new Dimension(110, 50));
+//		btnCheckout.setBounds(756, 270, 102, 65);
 
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,26 +132,27 @@ public class CheckoutPanel  extends JFrame implements LibWindow {
 		JPanel lblPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) lblPanel.getLayout();
 		flowLayout.setVgap(10);
-		flowLayout.setHgap(30);
+		flowLayout.setHgap(20);
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panel.add(lblPanel);
 		JLabel label = new JLabel(strLbl);
 		lblPanel.add(label);
 		label.setEnabled(bEnable);
 		label.setFont(ThemeColor.formLabel);
-		;
 
 		JPanel txtPanel = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) txtPanel.getLayout();
-		flowLayout_1.setHgap(5);
+		flowLayout_1.setHgap(0);
+//		txtPanel.setBackground(Color.black);
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		panel.add(txtPanel);
 		JTextField txtField = new JTextField();
+		txtField.setMargin(new Insets(5, 10, 5, 10));
+		txtField.setBounds(12, 30, 220, 39);
 		txtPanel.add(txtField);
 		txtField.setColumns(20);
 		txtField.setEnabled(bEnable);
 		
-
 		return txtField;
 	}
 

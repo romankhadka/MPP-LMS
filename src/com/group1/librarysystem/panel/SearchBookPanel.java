@@ -3,6 +3,8 @@ package com.group1.librarysystem.panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.SystemColor;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +24,6 @@ import business.LibrarySystemException;
 import business.SystemController;
 import business.BookDueDateDTO.BookDateInternalDTO;
 
-
 public class SearchBookPanel {
 	private SearchBookPanel() {
 	}
@@ -40,31 +41,30 @@ public class SearchBookPanel {
 		panel = new JPanel();
 		panel.setBounds(100, 100, 892, 593);
 		panel.setLayout(null);
-		
-		
 
 		JPanel searchPanel = new JPanel();
-		searchPanel.setBounds(42, 43, 616, 96);
+		searchPanel.setBounds(42, 43, 816, 96);
 		searchPanel.setBackground(ThemeColor.backgroundColor);
 //		searchPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));	
 		panel.add(searchPanel);
 		searchPanel.setLayout(null);
-		
+
 		JLabel AllIDsLabel = new JLabel("Overdue Book List");
 		AllIDsLabel.setFont(ThemeColor.titleText);
 		AllIDsLabel.setBounds(42, 10, 319, 36);
-		panel.add(AllIDsLabel);	
+		panel.add(AllIDsLabel);
 
 		searchTextField = new JTextField();
 		searchTextField.setToolTipText("Search Book with expired duedate");
 		searchTextField.setBounds(15, 40, 319, 36);
 		searchPanel.add(searchTextField);
+		searchTextField.setMargin(new Insets(5, 10, 5, 10));
 		searchTextField.setColumns(10);
 
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setFont(new Font("Roboto Slab", Font.BOLD, 13));
 		btnSearch.setForeground(Color.WHITE);
-		btnSearch.setBackground(new Color(0, 0, 139));
+		btnSearch.setBackground(SystemColor.desktop);
 		btnSearch.setBounds(345, 40, 90, 36);
 		searchPanel.add(btnSearch);
 
@@ -75,7 +75,7 @@ public class SearchBookPanel {
 
 		JPanel listPanel = new JPanel();
 		listPanel.setBackground(Color.WHITE);
-		listPanel.setBounds(42, 174, 616, 341);
+		listPanel.setBounds(42, 174, 816, 341);
 		panel.add(listPanel);
 		listPanel.setLayout(null);
 
@@ -89,15 +89,15 @@ public class SearchBookPanel {
 		table.setSurrendersFocusOnKeystroke(true);
 
 		DefaultTableModel model = new DefaultTableModel();
-		
+
 		String[] column = { "Copy Number", "Member", "Due Date" };
 
 		model.setColumnIdentifiers(column);
-		
+
 		table.setModel(model);
 
 		table.setBackground(new Color(249, 249, 249));
-		table.setBounds(44, 50, 528, 280);
+		table.setBounds(18, 50, 528, 280);
 		table.setFont(ThemeColor.normalText);
 		listPanel.add(table);
 
@@ -117,7 +117,7 @@ public class SearchBookPanel {
 					BookDueDateDTO books = ci.getOverdueBooks(searchTextField.getText());
 
 					if (books.getOverDueLists().size() != 0) {
-						
+
 						model.addRow(column);
 						for (BookDateInternalDTO entry : books.getOverDueLists()) {
 							Object[] row = new Object[3];
@@ -127,7 +127,7 @@ public class SearchBookPanel {
 							model.addRow(row);
 
 						}
-						JLabel lblBook = new JLabel("Book :"+ books.getTitle());
+						JLabel lblBook = new JLabel("Book :" + books.getTitle());
 						lblBook.setBounds(20, 20, 300, 15);
 						lblBook.setFont(ThemeColor.formLabel);
 						listPanel.add(lblBook);

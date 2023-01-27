@@ -1,9 +1,12 @@
 package com.group1.librarysystem.panel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -82,6 +85,8 @@ private static final long serialVersionUID = 5538744765326735797L;
 		listPanel.add(AddPanel);
 		
 		JButton btnSearch = new JButton("Find Book");
+		btnSearch.setForeground(SystemColor.desktop);
+		btnSearch.setBackground(Color.WHITE);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -99,6 +104,8 @@ private static final long serialVersionUID = 5538744765326735797L;
 		
 		//-------------Add-------------------
 		JButton btnAddCopy = new JButton("Add Copy");
+		btnAddCopy.setForeground(Color.WHITE);
+		btnAddCopy.setBackground(SystemColor.desktop);
 		btnAddCopy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -150,6 +157,8 @@ private static final long serialVersionUID = 5538744765326735797L;
 		JTextField txtField = new JTextField();
 		txtPanel.add(txtField);
 		txtField.setColumns(20);
+		txtField.setMargin(new Insets(5, 10, 5, 10));
+		txtField.setBounds(12, 30, 220, 39);
 		txtField.setEnabled(bEnable);
 		
 		return txtField;
