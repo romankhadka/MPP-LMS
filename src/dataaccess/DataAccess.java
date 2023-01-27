@@ -3,9 +3,8 @@ package dataaccess;
 import java.util.HashMap;
 import java.util.List;
 
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
-
 import business.Book;
+import business.CheckoutRecordDTO;
 import business.LibraryMember;
 import business.LibrarySystemException;
 import dataaccess.DataAccessFacade.StorageType;

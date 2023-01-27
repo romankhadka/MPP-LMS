@@ -2,9 +2,6 @@ package business;
 
 import java.util.List;
 
-import com.group1.librarysystem.dto.BookDueDateDTO;
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
-
 import business.Book;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;

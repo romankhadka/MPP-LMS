@@ -3,8 +3,6 @@ package business;
 import java.io.Serializable;
 import java.util.List;
 
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
-
 public class CheckoutRecord implements Serializable {
 	
 	

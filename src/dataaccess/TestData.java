@@ -6,12 +6,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
-
 import business.Address;
 import business.Author;
 import business.Book;
 import business.BookCopy;
+import business.CheckoutRecordDTO;
 import business.LibraryMember;
 
 /**

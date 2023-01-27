@@ -19,9 +19,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
 import com.group1.librarysystem.resources.ThemeColor;
 
+import business.CheckoutRecordDTO;
 import business.ControllerInterface;
 import business.SystemController;
 

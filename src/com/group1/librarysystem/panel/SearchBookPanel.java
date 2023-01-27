@@ -14,13 +14,13 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import com.group1.librarysystem.dto.BookDueDateDTO;
-import com.group1.librarysystem.dto.BookDueDateDTO.BookDateInternalDTO;
 import com.group1.librarysystem.resources.ThemeColor;
 
+import business.BookDueDateDTO;
 import business.ControllerInterface;
 import business.LibrarySystemException;
 import business.SystemController;
+import business.BookDueDateDTO.BookDateInternalDTO;
 
 
 public class SearchBookPanel {

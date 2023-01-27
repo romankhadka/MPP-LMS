@@ -1,4 +1,4 @@
-package com.group1.librarysystem.dto;
+package business;
 
 import java.time.LocalDate;
 import java.util.List;

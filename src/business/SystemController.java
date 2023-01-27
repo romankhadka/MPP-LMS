@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.group1.librarysystem.dto.BookDueDateDTO;
-import com.group1.librarysystem.dto.CheckoutRecordDTO;
-import com.group1.librarysystem.dto.BookDueDateDTO.BookDateInternalDTO;
-
+import business.BookDueDateDTO.BookDateInternalDTO;
 import dataaccess.Auth;
 import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;

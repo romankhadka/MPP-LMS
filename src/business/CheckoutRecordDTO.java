@@ -1,9 +1,7 @@
-package com.group1.librarysystem.dto;
+package business;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import business.BookCopy;
 
 public class CheckoutRecordDTO implements Serializable {
 	
