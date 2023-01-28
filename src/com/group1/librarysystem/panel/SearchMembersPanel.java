@@ -27,13 +27,11 @@ import business.CheckoutRecordDTO;
 import business.ControllerInterface;
 import business.SystemController;
 
+public class SearchMembersPanel extends javax.swing.JFrame {
 
-public class SearchMemberPanel extends javax.swing.JFrame{
-	private static final long serialVersionUID = -9123601970468408273L;
-
+	private static final long serialVersionUID = 1L;
 	ControllerInterface ci = new SystemController();
-
-	public static final SearchMemberPanel INSTANCE = new SearchMemberPanel();
+	public static final SearchMembersPanel INSTANCE = new SearchMembersPanel();
 
 	private JPanel mainPanel;
 	private JTextField txtMemberId;
@@ -46,13 +44,11 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 		return mainPanel;
 	}
 
-	SearchMemberPanel() {
-
+	SearchMembersPanel() {
 		mainPanel = new JPanel();
 		getContentPane().add(mainPanel, BorderLayout.NORTH);
 		mainPanel.setLayout(new BorderLayout(0, 0));
 
-		// -----------top-------------------------
 		JPanel topPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) topPanel.getLayout();
 		flowLayout.setVgap(30);
@@ -62,32 +58,26 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 
 		mainPanel.add(topPanel, BorderLayout.NORTH);
 
-		// --middle-----------------------------------------------------------------
 		JPanel middlePanel = new JPanel();
 		mainPanel.add(middlePanel, BorderLayout.CENTER);
 		middlePanel.setLayout(new BorderLayout(0, 0));
 
-		// -------------middle North--------------------------------
 		JPanel middleNorth = new JPanel();
 		middlePanel.add(middleNorth, BorderLayout.NORTH);
-		// listPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		middleNorth.setLayout(new BorderLayout(0, 50));
 
 		createMiddleNorth(middleNorth);
 
-		// -------------West--------------------------------
 		JPanel middleWest = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) middleWest.getLayout();
 		flowLayout_1.setHgap(50);
 		middlePanel.add(middleWest, BorderLayout.WEST);
 
-		// -------------East--------------------------------
 		JPanel eastWest = new JPanel();
 		FlowLayout flowLayout_2 = (FlowLayout) eastWest.getLayout();
 		flowLayout_2.setHgap(50);
 		middlePanel.add(eastWest, BorderLayout.EAST);
 
-		// -------------center--------------------------------
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(6, 154, 582, 287);
 		middlePanel.add(scrollPane, BorderLayout.CENTER);
@@ -99,7 +89,6 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 		model.setColumnIdentifiers(column);
 		tblRecord.setModel(model);
 		scrollPane.setViewportView(tblRecord);
-
 	}
 
 	public void init() {
@@ -149,10 +138,8 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 				List<CheckoutRecordDTO> list = null;
 				try {
 					list = ci.getCheckoutRecordByMemberId(txtMemberId.getText());
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					// e1.printStackTrace();
-					JOptionPane.showMessageDialog(parentFrame, e1.getMessage());
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(parentFrame, ex.getMessage());
 					return;
 				}
 
@@ -163,7 +150,7 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 				if (list == null)
 					return;
 
-				printHeaderInConsole();
+				printDataInConsole();
 
 				for (CheckoutRecordDTO entry : list) {
 					String[] row = new String[5];
@@ -180,8 +167,7 @@ public class SearchMemberPanel extends javax.swing.JFrame{
 
 			}
 
-			private void printHeaderInConsole() {
-				// TODO Auto-generated method stub
+			private void printDataInConsole() {
 				System.out.println("");
 				System.out
 						.println("-----------------------------------------------------------------------------------");

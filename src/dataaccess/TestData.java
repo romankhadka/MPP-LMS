@@ -31,14 +31,13 @@ public class TestData {
 		td.bookData();
 		td.libraryMemberData();
 		td.userData();
-	//	DataAccess da = new DataAccessFacade();
-	//	System.out.println(da.readBooksMap());
-	//	System.out.println(da.readUserMap());
+		DataAccess da = new DataAccessFacade();
+		System.out.println(da.readBooksMap());
+		System.out.println(da.readUserMap());
 		DataAccessFacade.loadCheckout();
 		try {
 			td.checkoutRecordData();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

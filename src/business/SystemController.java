@@ -64,14 +64,14 @@ public class SystemController implements ControllerInterface {
 	@Override
 	public BookCopy checkoutBook(String libraryMemberId, String isbn) throws Exception {
 		if (!checkIfLoginIdExists(libraryMemberId))
-			throw new Exception("You're not a member of our library");
+			throw new Exception("Not a member of library");
 
 		DataAccess da = new DataAccessFacade();
-		HashMap<String, Book> bookMap = da.readBooksMap();
-		if (!bookMap.containsKey(isbn))
-			throw new Exception("Book does not exist!!!");
+		HashMap<String, Book> bookMapList = da.readBooksMap();
+		if (!bookMapList.containsKey(isbn))
+			throw new Exception("Book does not exist!");
 
-		Book book = bookMap.get(isbn);
+		Book book = bookMapList.get(isbn);
 		if (!book.isAvailable())
 			throw new Exception("Requested book with ISBN " + isbn + " is not available");
 		return addToCheckout(book.getNextAvailableCopy(), libraryMemberId);
@@ -96,8 +96,8 @@ public class SystemController implements ControllerInterface {
 
 	private boolean checkIfLoginIdExists(String libraryMemberId) {
 		DataAccess da = new DataAccessFacade();
-		HashMap<String, LibraryMember> map = da.readMemberMap();
-		return map.containsKey(libraryMemberId) ? true : false;
+		HashMap<String, LibraryMember> mapList = da.readMemberMap();
+		return mapList.containsKey(libraryMemberId) ? true : false;
 	}
 
 	@Override
@@ -113,64 +113,58 @@ public class SystemController implements ControllerInterface {
 
 	@Override
 	public BookDueDateDTO getOverdueBooks(String isbnNumber) throws LibrarySystemException {
-		BookDueDateDTO response = new BookDueDateDTO();
+		BookDueDateDTO bookDueDateDto = new BookDueDateDTO();
 		DataAccess da = new DataAccessFacade();
 		HashMap<String, List<CheckoutRecordDTO>> checkoutRecordList = da.readCheckoutRecord();
 		List<BookDateInternalDTO> overDueList = new ArrayList<>();
-		LocalDate currentDate = LocalDate.now();
 		HashMap<String, Book> bookMap = da.readBooksMap();
 		Book book = bookMap.get(isbnNumber);
-		if (book == null) {
+		if (book == null) 
 			throw new LibrarySystemException("No such book exist");
-		}
+		
 		String title = book.getTitle();
-
-		checkoutRecordList.forEach((k, v) -> {
-			v.forEach(e -> {
-				if ((e.getBookCopy().getBook().getIsbn().equals(isbnNumber))
-						&& ((e.getDueDate()).isBefore(currentDate))) {
-					int copyNumber = e.getBookCopy().getCopyNum();
-					String memberId = e.getMemberId();
-					LocalDate dueDate = e.getDueDate();
-
-					BookDateInternalDTO record = response.new BookDateInternalDTO();
-					record.setCopyNumber(copyNumber);
-					record.setMemberId(memberId);
-					record.setDueDate(dueDate);
-
-					overDueList.add(record);
+		checkoutRecordList.forEach((key, value) -> {
+			value.forEach(p -> {
+				if ((p.getBookCopy().getBook().getIsbn().equals(isbnNumber))
+						&& ((p.getDueDate()).isBefore(LocalDate.now()))) {
+					int copyNumber = p.getBookCopy().getCopyNum();
+					String memberId = p.getMemberId();
+					LocalDate dueDate = p.getDueDate();
+					BookDateInternalDTO dto = bookDueDateDto.new BookDateInternalDTO();
+					dto.setCopyNumber(copyNumber);
+					dto.setMemberId(memberId);
+					dto.setDueDate(dueDate);
+					overDueList.add(dto);
 				}
 			});
 		});
 
-		response.setISBN(isbnNumber);
-		response.setOverDueLists(overDueList);
-		response.setTitle(title);
-
-		return response;
+		bookDueDateDto.setIsbn(isbnNumber);
+		bookDueDateDto.setOverDueLists(overDueList);
+		bookDueDateDto.setTitle(title);
+		return bookDueDateDto;
 	}
 
 	@Override
 	public Book getBook(String isbn) throws Exception {
 		DataAccess da = new DataAccessFacade();
-		HashMap<String, Book> bookMap = da.readBooksMap();
-		if (!bookMap.containsKey(isbn))
-			throw new Exception("No book found, couldn't add new copy");
-		Book book = bookMap.get(isbn);
+		HashMap<String, Book> bookMapList = da.readBooksMap();
+		if (!bookMapList.containsKey(isbn))
+			throw new Exception("Book not found "+isbn);
+		Book book = bookMapList.get(isbn);
 		return book;
 	}
 
 	@Override
 	public Book addNewBookCopy(String isbn) throws Exception {
 		DataAccess da = new DataAccessFacade();
-		HashMap<String, Book> bookMap = da.readBooksMap();
-		if (!bookMap.containsKey(isbn))
-			throw new Exception("No book found, couldn't add new copy");
-		Book b = bookMap.get(isbn);
-		b.addCopy();
-		da.updateBook(b);
-
-		return b;
+		HashMap<String, Book> bookMapList = da.readBooksMap();
+		if (!bookMapList.containsKey(isbn))
+			throw new Exception("Book not found "+isbn);
+		Book book = bookMapList.get(isbn);
+		book.addCopy();
+		da.updateBook(book);
+		return book;
 	}
 
 }

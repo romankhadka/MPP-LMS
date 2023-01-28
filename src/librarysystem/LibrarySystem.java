@@ -20,6 +20,7 @@ import business.SystemController;
 
 
 public class LibrarySystem extends JFrame implements LibWindow {
+	private static final long serialVersionUID = 1L;
 	public final static LibrarySystem INSTANCE =new LibrarySystem();
 	JPanel mainPanel;
     private boolean isInitialized = false;

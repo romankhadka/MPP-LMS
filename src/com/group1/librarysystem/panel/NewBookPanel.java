@@ -31,8 +31,8 @@ import business.ControllerInterface;
 import business.LibrarySystemException;
 import business.SystemController;
 
-public class AddNewBookPanel {
-	private AddNewBookPanel() {
+public class NewBookPanel {
+	private NewBookPanel() {
 	}
 
 	private static JPanel panel;
@@ -67,7 +67,6 @@ public class AddNewBookPanel {
 		lblAddNewMember.setBackground(ThemeColor.backgroundColor);
 		lblAddNewMember.setBounds(42, 10, 319, 36);
 		panel.add(lblAddNewMember);
-		
 
 		JPanel bookPanel = new JPanel();
 		bookPanel.setBounds(51, 46, 807, 161);
@@ -164,7 +163,6 @@ public class AddNewBookPanel {
 		panel.add(btnCancel);
 
 		JPanel authorPanel = new JPanel();
-//		authorPanel.setBackground(Color.WHITE);
 		authorPanel.setBounds(51, 273, 807, 350);
 		panel.add(authorPanel);
 		authorPanel.setLayout(null);
@@ -218,13 +216,13 @@ public class AddNewBookPanel {
 		addressPanel.add(bio);
 		bio.setBounds(255, 166, 437, 72);
 		bio.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		street = new JTextField();
 		addressPanel.add(street);
 		street.setColumns(10);
 		street.setBounds(23, 99, 211, 39);
 		street.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		JLabel lblStreet_2 = new JLabel("Street");
 		addressPanel.add(lblStreet_2);
 		lblStreet_2.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -235,7 +233,7 @@ public class AddNewBookPanel {
 		city.setColumns(10);
 		city.setBounds(255, 99, 200, 39);
 		city.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		JLabel lblId_1_2_2 = new JLabel("City");
 		addressPanel.add(lblId_1_2_2);
 		lblId_1_2_2.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -246,7 +244,7 @@ public class AddNewBookPanel {
 		state.setColumns(10);
 		state.setBounds(465, 99, 174, 39);
 		state.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		JLabel lblId_1_1_1_1 = new JLabel("State");
 		addressPanel.add(lblId_1_1_1_1);
 		lblId_1_1_1_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -257,7 +255,7 @@ public class AddNewBookPanel {
 		zip.setColumns(10);
 		zip.setBounds(657, 99, 135, 39);
 		zip.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		JLabel lblId_1_2_1_1 = new JLabel("Zip");
 		addressPanel.add(lblId_1_2_1_1);
 		lblId_1_2_1_1.setFont(new Font("Fira Code Retina", Font.BOLD, 13));
@@ -272,7 +270,7 @@ public class AddNewBookPanel {
 		telephoneNo.setColumns(10);
 		telephoneNo.setBounds(23, 168, 211, 39);
 		telephoneNo.setMargin(new Insets(5, 10, 5, 10));
-		
+
 		addressPanel.add(telephoneNo);
 
 		JLabel lblId_1_2_1_1_1 = new JLabel("Telephone Number");
@@ -286,7 +284,8 @@ public class AddNewBookPanel {
 			String zipCode = zip.getText();
 			String phone = telephoneNo.getText();
 			if (fN.equals("") || lN.equals("") || street.getText().equals("") || city.getText().equals("")
-					|| state.getText().equals("") || zipCode.equals("") || phone.equals("") || bio.getText().equals("")) {
+					|| state.getText().equals("") || zipCode.equals("") || phone.equals("")
+					|| bio.getText().equals("")) {
 				JOptionPane.showMessageDialog(frame, "Please fill all the fields");
 			} else if (!fN.matches("[a-zA-Z]*") || !lN.matches("[a-zA-Z]*")) {
 				JOptionPane.showMessageDialog(frame, "Names cannot have numbers");
@@ -311,7 +310,6 @@ public class AddNewBookPanel {
 		});
 
 		authorPanel.setVisible(false);
-
 		return panel;
 
 	}
@@ -320,8 +318,6 @@ public class AddNewBookPanel {
 		isbn.setText("");
 		title.setText("");
 		maxCheckoutLength.setSelectedIndex(0);
-		;
-
 	}
 
 	private static void clearAuthorInputField() {

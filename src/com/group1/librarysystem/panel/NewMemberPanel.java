@@ -19,10 +19,11 @@ import business.LibraryMember;
 import business.LibrarySystemException;
 import business.SystemController;
 
-public class AddLibraryMemberPanel {
+public class NewMemberPanel {
 
-	private AddLibraryMemberPanel() {
+	private NewMemberPanel() {
 	}
+
 	private static JPanel panel;
 	private static JTextField id;
 	private static JTextField firstName;
@@ -51,7 +52,7 @@ public class AddLibraryMemberPanel {
 		lblAddNewMember.setForeground(Color.DARK_GRAY);
 		lblAddNewMember.setBounds(51, 29, 270, 30);
 		panel.add(lblAddNewMember);
-		
+
 		id = new JTextField();
 		id.setBounds(62, 127, 148, 39);
 		id.setMargin(new Insets(5, 10, 5, 10));
@@ -195,7 +196,7 @@ public class AddLibraryMemberPanel {
 	}
 
 	private static void clearInputField() {
-		id.setText("");	
+		id.setText("");
 		firstName.setText("");
 		lastName.setText("");
 		street.setText("");

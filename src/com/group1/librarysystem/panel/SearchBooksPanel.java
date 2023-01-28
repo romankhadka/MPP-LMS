@@ -24,8 +24,8 @@ import business.LibrarySystemException;
 import business.SystemController;
 import business.BookDueDateDTO.BookDateInternalDTO;
 
-public class SearchBookPanel {
-	private SearchBookPanel() {
+public class SearchBooksPanel {
+	private SearchBooksPanel() {
 	}
 
 	private static JPanel panel;
@@ -45,7 +45,6 @@ public class SearchBookPanel {
 		JPanel searchPanel = new JPanel();
 		searchPanel.setBounds(42, 43, 816, 96);
 		searchPanel.setBackground(ThemeColor.backgroundColor);
-//		searchPanel.setBorder(BorderFactory.createCompoundBorder(new EmptyBorder(10, 10, 10, 10), new EtchedBorder()));	
 		panel.add(searchPanel);
 		searchPanel.setLayout(null);
 
@@ -78,11 +77,6 @@ public class SearchBookPanel {
 		listPanel.setBounds(42, 174, 816, 341);
 		panel.add(listPanel);
 		listPanel.setLayout(null);
-
-//		JLabel lblCheckoutRecords = new JLabel("Book Copy Records With Expired DueDate");
-//		lblCheckoutRecords.setFont(new Font("Roboto Slab", Font.BOLD, 16));
-//		lblCheckoutRecords.setBounds(33, 35, 319, 21);
-//		listPanel.add(lblCheckoutRecords);
 
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -136,14 +130,13 @@ public class SearchBookPanel {
 
 					} else {
 						listPanel.setVisible(false);
-						JOptionPane.showMessageDialog(frame, "No Copies with expired DueDate found");
+						JOptionPane.showMessageDialog(frame, "No Copies with expired Duedate");
 					}
 				} catch (LibrarySystemException err) {
 					listPanel.setVisible(false);
 					JOptionPane.showMessageDialog(frame, err.getMessage());
 				}
 			}
-			;
 
 		});
 

@@ -1,9 +1,6 @@
 package librarysystem;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.SystemColor;
@@ -12,28 +9,25 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JOptionPane;
 
 import business.ControllerInterface;
 import business.LoginException;
 import business.SystemController;
 
 public class LoginWindow extends JFrame implements LibWindow {
+	private static final long serialVersionUID = 1L;
 	public static final LoginWindow INSTANCE = new LoginWindow();
 	ControllerInterface controllerInterface = new SystemController();
-
 	private boolean isInitialized = false;
-
 	private JPanel mainPanel;
 	private JTextField username;
 	private JTextField password;
@@ -68,13 +62,11 @@ public class LoginWindow extends JFrame implements LibWindow {
 		try {
 			defineCentral();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		mainPanel.setBounds(100, 100, 821, 722);
 		mainPanel.setBackground(Color.WHITE);
 		mainPanel.setLayout(null);
-
 		mainPanel.add(centralFormPanel);
 
 		getContentPane().add(mainPanel);
@@ -82,14 +74,10 @@ public class LoginWindow extends JFrame implements LibWindow {
 	}
 
 	private void defineCentral() throws IOException {
-
 		centralFormPanel = new JPanel();
 		centralFormPanel.setBackground(new Color(249, 249, 249));
 		centralFormPanel.setBounds(400, 75, 450, 550);
 		centralFormPanel.setLayout(null);
-
-//		String currDirectory = System.getProperty("user.dir");
-//		String pathToImage = currDirectory + "/src/librarysystem/Library.png";
 		
 		BufferedImage myPicture = ImageIO.read(new File(System.getProperty("user.dir")+"/src/librarysystem/library.png"));
 		JLabel picLabel = new JLabel(new ImageIcon(myPicture));
@@ -185,21 +173,16 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 	private void addLoginButtonListener(JButton butn) {
 		butn.addActionListener(evt -> {
-
 			try {
 				controllerInterface.login(username.getText(), password.getText());
 			} catch (LoginException e) {
-				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(this, e.getMessage());
-				// e.printStackTrace();
 				return;
 			}
-
 			LibrarySystem.hideAllWindows();
-
-			PortalWindow.INSTANCE.setUser(username.getText(), SystemController.currentAuth);
-			Util.centerFrameOnDesktop(PortalWindow.INSTANCE);
-			PortalWindow.INSTANCE.setVisible(true);
+			DashboardWindow.INSTANCE.setUser(username.getText(), SystemController.currentAuth);
+			Util.centerFrameOnDesktop(DashboardWindow.INSTANCE);
+			DashboardWindow.INSTANCE.setVisible(true);
 		});
 	}
 

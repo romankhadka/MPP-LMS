@@ -25,9 +25,9 @@ import business.ControllerInterface;
 import business.SystemController;
 import librarysystem.LibWindow;
 
-public class AddNewBookCopyPanel extends JFrame implements LibWindow {
-private static final long serialVersionUID = 5538744765326735797L;
-	
+public class NewBookCopyPanel extends JFrame implements LibWindow {
+	private static final long serialVersionUID = 5538744765326735797L;
+
 	private boolean isInitialized = false;
 	private JPanel mainPanel;
 	private JFrame parentFrame;
@@ -36,22 +36,19 @@ private static final long serialVersionUID = 5538744765326735797L;
 	private JTextField txtAuthor;
 	private JTextField txtCheckoutLeng;
 	private JTextField txtCopies;
-	
-	ControllerInterface ci = new SystemController();
-	public static final AddNewBookCopyPanel INSTANCE = new AddNewBookCopyPanel();
 
-	public AddNewBookCopyPanel() {
-		init();		
+	ControllerInterface ci = new SystemController();
+	public static final NewBookCopyPanel INSTANCE = new NewBookCopyPanel();
+
+	public NewBookCopyPanel() {
+		init();
 	}
-	
+
 	public void init() {
-		
 		mainPanel = new JPanel();
 		getContentPane().add(mainPanel, BorderLayout.CENTER);
 		mainPanel.setLayout(new BorderLayout(0, 0));
-		//mainPanel.setLayout(new GridLayout(3, 1, 0, 0));
-		
-		//--north-----------------------------------------------------------------
+
 		JPanel northPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) northPanel.getLayout();
 		flowLayout.setVgap(30);
@@ -59,50 +56,45 @@ private static final long serialVersionUID = 5538744765326735797L;
 		northLabel.setFont(new Font("Fira Code Retina", Font.BOLD, 20));
 		northPanel.add(northLabel);
 		mainPanel.add(northPanel, BorderLayout.NORTH);
-		
 
-		//--middle-----------------------------------------------------------------
 		JPanel middlePanel = new JPanel();
 		mainPanel.add(middlePanel, BorderLayout.CENTER);
-		middlePanel.setLayout(new BorderLayout(0, 0));	
+		middlePanel.setLayout(new BorderLayout(0, 0));
 
-		//-------------list--------------------------------
 		JPanel listPanel = new JPanel();
-		middlePanel.add(listPanel,BorderLayout.NORTH);
+		middlePanel.add(listPanel, BorderLayout.NORTH);
 		listPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		txtISBN 	= getLblAndTxt(listPanel, "Book ISBN", true);
-		txtTitle 	= getLblAndTxt(listPanel, "Title",false);
-		txtAuthor 	= getLblAndTxt(listPanel, "Authors",false);
-		txtCheckoutLeng = getLblAndTxt(listPanel, "Max Checkout Length",false);
-		txtCopies 	= getLblAndTxt(listPanel, "Current Copies",false);
-		
+
+		txtISBN = getLabelAndText(listPanel, "Book ISBN", true);
+		txtTitle = getLabelAndText(listPanel, "Title", false);
+		txtAuthor = getLabelAndText(listPanel, "Authors", false);
+		txtCheckoutLeng = getLabelAndText(listPanel, "Max Checkout Length", false);
+		txtCopies = getLabelAndText(listPanel, "Current Copies", false);
+
 		JLabel label = new JLabel("");
 		listPanel.add(label);
-		
-		//-------------Search-------------------
+
 		JPanel AddPanel = new JPanel();
 		listPanel.add(AddPanel);
-		
-		JButton btnSearch = new JButton("Find Book");
+
+		JButton btnSearch = new JButton("Search Book");
 		btnSearch.setForeground(SystemColor.desktop);
 		btnSearch.setBackground(Color.WHITE);
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Book b = ci.getBook(txtISBN.getText());
-					updateBook(b);	
+					updateBook(b);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(parentFrame,e1.getMessage());
+					JOptionPane.showMessageDialog(parentFrame, e1.getMessage());
 					return;
 				}
 
 			}
 		});
-		
+
 		AddPanel.add(btnSearch);
-		
-		//-------------Add-------------------
+
 		JButton btnAddCopy = new JButton("Add Copy");
 		btnAddCopy.setForeground(Color.WHITE);
 		btnAddCopy.setBackground(SystemColor.desktop);
@@ -110,35 +102,35 @@ private static final long serialVersionUID = 5538744765326735797L;
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Book b = ci.addNewBookCopy(txtISBN.getText());
-					JOptionPane.showMessageDialog(parentFrame,"New Copy has been added");
-					updateBook(b);	
+					JOptionPane.showMessageDialog(parentFrame, "New Copy has been sucessfully added");
+					updateBook(b);
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(parentFrame,e1.getMessage());
+					JOptionPane.showMessageDialog(parentFrame, e1.getMessage());
 					return;
 				}
 			}
 		});
-		
+
 		AddPanel.add(btnAddCopy);
-		
+
 	}
-	
-	private void updateBook(Book b) {
-		txtTitle.setText(" " + b.getTitle());
-		txtCheckoutLeng.setText(" " + b.getMaxCheckoutLength());
-		List<String> strAuth = new ArrayList<>();
-		for(Author au: b.getAuthors()) {
-			strAuth.add(au.getFirstName() + " " + au.getLastName());
+
+	private void updateBook(Book book) {
+		txtTitle.setText(" " + book.getTitle());
+		txtCheckoutLeng.setText(" " + book.getMaxCheckoutLength());
+		List<String> authList = new ArrayList<>();
+		for (Author au : book.getAuthors()) {
+			authList.add(au.getFirstName() + " " + au.getLastName());
 		}
-		txtAuthor.setText(" " + strAuth.toString());
-		txtCopies.setText(" " + b.getNumCopies());		
+		txtAuthor.setText(" " + authList.toString());
+		txtCopies.setText(" " + book.getNumCopies());
 	}
-	
-	private JTextField getLblAndTxt(JPanel parentPanel, String strLbl, boolean bEnable) {
+
+	private JTextField getLabelAndText(JPanel parentPanel, String strLbl, boolean bEnable) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		parentPanel.add(panel);
-		
+
 		JPanel lblPanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) lblPanel.getLayout();
 		flowLayout.setVgap(10);
@@ -147,8 +139,8 @@ private static final long serialVersionUID = 5538744765326735797L;
 		panel.add(lblPanel);
 		JLabel label = new JLabel(strLbl);
 		lblPanel.add(label);
-		label.setEnabled(bEnable);;
-		
+		label.setEnabled(bEnable);
+
 		JPanel txtPanel = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) txtPanel.getLayout();
 		flowLayout_1.setHgap(5);
@@ -160,10 +152,10 @@ private static final long serialVersionUID = 5538744765326735797L;
 		txtField.setMargin(new Insets(5, 10, 5, 10));
 		txtField.setBounds(12, 30, 220, 39);
 		txtField.setEnabled(bEnable);
-		
+
 		return txtField;
 	}
-	
+
 	public JPanel getMainPanel(JFrame _parentFrame) {
 		parentFrame = _parentFrame;
 		return mainPanel;
@@ -171,15 +163,13 @@ private static final long serialVersionUID = 5538744765326735797L;
 
 	@Override
 	public boolean isInitialized() {
-		// TODO Auto-generated method stub
-		return  isInitialized;
+		return isInitialized;
 	}
 
 	@Override
 	public void isInitialized(boolean val) {
-		// TODO Auto-generated method stub
 		isInitialized = val;
-		
+
 	}
 
 }
